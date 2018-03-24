@@ -3,11 +3,41 @@ ul {
     padding: 0;
 }
 
-.card {
-    height:150px;
+.card_container,
+.front,
+.back {
+    height: 150px;
     width: 150px;
-    border: solid 1px black;
+}
+
+.card_container {
     margin: 20px;
+}
+
+.card_container:hover .card {
+    transform: rotateY(180deg);
+}
+
+.card {
+    transform-style: preserve-3d;
+    transition: 0.7s;
+    position: relative;
+}
+
+.front {
+    background: red;
+    z-index: 2;
+}
+
+.back {
+    background: blue;
+    transform: rotateY(180deg);
+}
+
+.front,
+.back {
+    backface-visibility: hidden;
+    position: absolute;
 }
 
 #container {
