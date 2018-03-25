@@ -10,8 +10,11 @@ document.querySelector('#deck').addEventListener('click', function (e) {
             matchState.value2 = null;
         } else {
             matchState.value2 = e.target.parentNode.dataset.identifier;
-            // Debug Log
-            console.log("Value 1 = " + matchState.value1 + " value 2 = " + matchState.value2 + ". Is a match? " + matchState.checkMatch());
+            //If checkMatch is not true, flip all cards that are "flipped" with the identifier values in matchState.
+            if(!matchState.checkMatch()) {
+                setTimeout(function() {flipCard(document.querySelector('.card[data-identifier="' + matchState.value1 + '"].flipped'))}, 500);
+                setTimeout(function() {flipCard(document.querySelector('.card[data-identifier="' + matchState.value2 + '"].flipped'))}, 500);
+            }
         }
     }
 });
@@ -79,6 +82,7 @@ function reset() {
 }
 
 const matchState = {
+    //TODO: Add move count here
     value1:null,
     value2:null,
     checkMatch: function() {
