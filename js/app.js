@@ -6,10 +6,12 @@ document.querySelector('#deck').addEventListener('click', function (e) {
     if (e.target.parentNode.classList.value === "card") {
         flipCard(e.target.parentNode);
         if(matchState.value1 === null || matchState.value2 !== null) {
-            matchState.value1 = e.target.parentNode.parentNode.dataset.identifier;
+            matchState.value1 = e.target.parentNode.dataset.identifier;
             matchState.value2 = null;
         } else {
-            matchState.value2 = e.target.parentNode.parentNode.dataset.identifier;
+            matchState.value2 = e.target.parentNode.dataset.identifier;
+            // Debug Log
+            console.log("Value 1 = " + matchState.value1 + " value 2 = " + matchState.value2 + ". Is a match? " + matchState.checkMatch());
         }
     }
 });
@@ -47,9 +49,9 @@ function deal(cards, locations) {
         const locationOne = document.querySelector('.card_container:nth-child(' + locations[i] + ')');
         const locationTwo = document.querySelector('.card_container:nth-child(' + locations[i + 8] + ')');
         locationOne.querySelector('.back').textContent = currentCard;
-        locationOne.dataset.identifier = i;
+        locationOne.querySelector('.card').dataset.identifier = i;
         locationTwo.querySelector('.back').textContent = currentCard;
-        locationTwo.dataset.identifier = i;
+        locationTwo.querySelector('.card').dataset.identifier = i;
     }
 }
 
