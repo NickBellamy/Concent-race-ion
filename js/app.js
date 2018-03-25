@@ -1,18 +1,19 @@
 // Flip card over on click
-document.querySelector('#deck').addEventListener('click', function(e){
+document.querySelector('#deck').addEventListener('click', function(e) {
     if (e.target.classList.contains("front")) {
         e.target.parentNode.classList.toggle("flip");
     }
 });
 
+document.querySelector('#restart a').addEventListener('click', function(e) {
+    e.preventDefault;
+    reset();
+})
+
 // Can be any length - only 8 will be chosen
 let cards = [1,2,3,4,5,6,7,8,9,10,11,12,13];
-// Must be 16 long as each number referes to a location in the grid
-let locations = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
 
-cards = shuffle(cards);
-locations = shuffle(locations);
-deal(cards, locations);
+reset();
 
 // Randomises the order of items in an array using the Fisher-Yates shuffle
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
@@ -40,4 +41,10 @@ function deal(cards, locations) {
         locationOne.querySelector('.back').textContent = currentCard;
         locationTwo.querySelector('.back').textContent = currentCard;
     }
+}
+
+function reset() {
+    shuffledCards = shuffle(cards);
+    randomisedLocations = shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
+    deal(shuffledCards, randomisedLocations);
 }
