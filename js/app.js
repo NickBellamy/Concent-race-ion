@@ -5,6 +5,12 @@ document.querySelector('#deck').addEventListener('click', function (e) {
     // Only true if card is face down ("flipped" class not applied)
     if (e.target.parentNode.classList.value === "card") {
         flipCard(e.target.parentNode);
+        if(matchState.value1 === null || matchState.value2 !== null) {
+            matchState.value1 = e.target.parentNode.parentNode.dataset.identifier;
+            matchState.value2 = null;
+        } else {
+            matchState.value2 = e.target.parentNode.parentNode.dataset.identifier;
+        }
     }
 });
 
@@ -70,6 +76,13 @@ function reset() {
     setTimeout(function () { deal(shuffledCards, randomisedLocations) }, 500);
 }
 
+const matchState = {
+    value1:null,
+    value2:null,
+    checkMatch: function() {
+        return this.value1===this.value2 ? true : false;
+    }
+}
 
 /* Main program loop */
 
