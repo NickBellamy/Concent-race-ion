@@ -63,10 +63,6 @@ ul {
     }
 }
 
-.card_container:hover .card {
-    transform: rotateY(180deg);
-}
-
 .card {
     transform-style: preserve-3d;
     transition: 0.7s;
@@ -87,6 +83,10 @@ ul {
 .back {
     backface-visibility: hidden;
     position: absolute;
+}
+
+.flip {
+    transform: rotateY(180deg);
 }
 
 #container {
