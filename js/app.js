@@ -1,7 +1,7 @@
 // Flip card over on click
 document.querySelector('#deck').addEventListener('click', function(e) {
     if (e.target.classList.contains("front")) {
-        e.target.parentNode.classList.toggle("flip");
+        e.target.parentNode.classList.toggle("flipped");
     }
 });
 
@@ -44,7 +44,19 @@ function deal(cards, locations) {
 }
 
 function reset() {
+    flipCards();
     shuffledCards = shuffle(cards);
     randomisedLocations = shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
-    deal(shuffledCards, randomisedLocations);
+    // setTimeout delays dealing until the flip animation has finished flipping cards face down
+    setTimeout(function() {deal(shuffledCards, randomisedLocations)}, 500);
+}
+
+// Flip any face up cards, face down
+function flipCards() {
+    const flippedCards = document.querySelectorAll('.flipped');
+    flippedCards.forEach(
+        function(item) {
+            item.classList.remove('flipped');
+        }
+    )
 }

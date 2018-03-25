@@ -85,7 +85,7 @@ ul {
     position: absolute;
 }
 
-.flip {
+.flipped {
     transform: rotateY(180deg);
 }
 
