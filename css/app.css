@@ -14,7 +14,7 @@ ul {
     width: 74px;
 }
 
-@media screen and (min-width: 400px){
+@media screen and (min-width: 400px) {
     .card_container,
     .front,
     .back {
@@ -23,7 +23,7 @@ ul {
     }
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 600px) {
     .card_container,
     .front,
     .back {
@@ -32,7 +32,7 @@ ul {
     }
 }
 
-@media screen and (min-width: 1920px){
+@media screen and (min-width: 1920px) {
     .card_container,
     .front,
     .back {
@@ -45,19 +45,19 @@ ul {
     margin: 3px;
 }
 
-@media screen and (min-width: 400px){
+@media screen and (min-width: 400px) {
     .card_container {
         margin: 5px;
     }
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 600px) {
     .card_container {
         margin: 10px;
     }
 }
 
-@media screen and (min-width: 1920px){
+@media screen and (min-width: 1920px) {
     .card_container {
         margin: 15px;
     }
@@ -97,19 +97,19 @@ ul {
     margin: auto;
 }
 
-@media screen and (min-width: 400px){
+@media screen and (min-width: 400px) {
     #container {
         width: 400px;
     }
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 600px) {
     #container {
         width: 600px;
     }
 }
 
-@media screen and (min-width: 1920px){
+@media screen and (min-width: 1920px) {
     #container {
         width: 800px;
     }
