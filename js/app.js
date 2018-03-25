@@ -5,15 +5,27 @@ document.querySelector('#deck').addEventListener('click', function (e) {
     // Only true if card is face down ("flipped" class not applied)
     if (e.target.parentNode.classList.value === "card") {
         flipCard(e.target.parentNode);
-        if(matchState.value1 === null || matchState.value2 !== null) {
+        if (matchState.value1 === null || matchState.value2 !== null) {
             matchState.value1 = e.target.parentNode.dataset.identifier;
             matchState.value2 = null;
         } else {
             matchState.value2 = e.target.parentNode.dataset.identifier;
-            //If checkMatch is not true, flip all cards that are "flipped" with the identifier values in matchState.
-            if(!matchState.checkMatch()) {
-                setTimeout(function() {flipCard(document.querySelector('.card[data-identifier="' + matchState.value1 + '"].flipped'))}, 500);
-                setTimeout(function() {flipCard(document.querySelector('.card[data-identifier="' + matchState.value2 + '"].flipped'))}, 500);
+            // If match is made
+            if (matchState.checkMatch()) {
+                matchState.matchCount++;
+                // Check for win
+                if (matchState.matchCount >= 8) {
+                    alert("You Win!!  You made " + matchState.falseMoves + " false moves.");
+                }
+            // Else checkMatch is not true; flip all cards that are "flipped" with the identifier values in matchState.
+            } else {
+                matchState.falseMoves++;
+                setTimeout(function () {
+                    flipCard(document.querySelector('.card[data-identifier="' + matchState.value1 + '"].flipped'))
+                }, 500);
+                setTimeout(function () {
+                    flipCard(document.querySelector('.card[data-identifier="' + matchState.value2 + '"].flipped'))
+                }, 500);
             }
         }
     }
@@ -74,6 +86,8 @@ function flipCardsDown() {
 }
 
 function reset() {
+    matchState.falseMoves = 0;
+    matchState.matchCount = 0;
     flipCardsDown();
     shuffledCards = shuffle(cards);
     randomisedLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
@@ -82,11 +96,12 @@ function reset() {
 }
 
 const matchState = {
-    //TODO: Add move count here
-    value1:null,
-    value2:null,
-    checkMatch: function() {
-        return this.value1===this.value2 ? true : false;
+    falseMoves: 0,
+    matchCount: 0,
+    value1: null,
+    value2: null,
+    checkMatch: function () {
+        return this.value1 === this.value2 ? true : false;
     }
 }
 
