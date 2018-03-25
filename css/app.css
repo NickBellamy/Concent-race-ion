@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -6,12 +10,57 @@ ul {
 .card_container,
 .front,
 .back {
-    height: 150px;
-    width: 150px;
+    height: 74px;
+    width: 74px;
+}
+
+@media screen and (min-width: 400px){
+    .card_container,
+    .front,
+    .back {
+        height: 90px;
+        width: 90px;
+    }
+}
+
+@media screen and (min-width: 600px){
+    .card_container,
+    .front,
+    .back {
+        height: 130px;
+        width: 130px;
+    }
+}
+
+@media screen and (min-width: 1920px){
+    .card_container,
+    .front,
+    .back {
+        height: 170px;
+        width: 170px;
+    }
 }
 
 .card_container {
-    margin: 20px;
+    margin: 3px;
+}
+
+@media screen and (min-width: 400px){
+    .card_container {
+        margin: 5px;
+    }
+}
+
+@media screen and (min-width: 600px){
+    .card_container {
+        margin: 10px;
+    }
+}
+
+@media screen and (min-width: 1920px){
+    .card_container {
+        margin: 15px;
+    }
 }
 
 .card_container:hover .card {
@@ -44,18 +93,40 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 320px;
+    margin: auto;
+}
+
+@media screen and (min-width: 400px){
+    #container {
+        width: 400px;
+    }
+}
+
+@media screen and (min-width: 600px){
+    #container {
+        width: 600px;
+    }
+}
+
+@media screen and (min-width: 1920px){
+    #container {
+        width: 800px;
+    }
 }
 
 #score_panel {
-    width: 730px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+#score_panel div {
+    padding: 0 20px;
 }
 
 #deck {
     display: flex;
     flex-wrap: wrap;
-    width: 800px;
     justify-content: center;
 }
