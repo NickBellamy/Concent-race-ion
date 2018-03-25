@@ -33,13 +33,16 @@ function shuffle(array) {
 } 
 
 // Deal 2 of each of the first 8 cards in cards, to each location in locations
+// dataset.identifier property is used to identify matching pairs of cards
 function deal(cards, locations) {
     for(let i=0; i < 8; i++) {
         const currentCard = cards[i];
         const locationOne = document.querySelector('.card_container:nth-child('+locations[i] + ')');
         const locationTwo = document.querySelector('.card_container:nth-child('+locations[i + 8] + ')');
         locationOne.querySelector('.back').textContent = currentCard;
+        locationOne.dataset.identifier= i;
         locationTwo.querySelector('.back').textContent = currentCard;
+        locationTwo.dataset.identifier= i;
     }
 }
 
