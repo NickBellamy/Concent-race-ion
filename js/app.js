@@ -124,10 +124,11 @@ const gameState = {
             return this.CLICKRESULT.NULLMATCH;
         } else if (this.cardId1 === this.cardId2) {
             this.matchCount++;
-            console.log(this.matchCount);
+            this.updateMoveCount();
             return this.matchCount >= 8 ? this.CLICKRESULT.WIN : this.CLICKRESULT.MATCH;
         } else {
             this.falseMoves++;
+            this.updateMoveCount();
             return this.CLICKRESULT.NOMATCH;
         }
     },
@@ -139,6 +140,9 @@ const gameState = {
         } else {
             this.cardId2 = clickedCard;
         }
+    },
+    updateMoveCount: function() {
+        document.querySelector('#moves span').textContent = this.falseMoves + this.matchCount;
     },
     reset: function () {
         this.falseMoves = 0;
