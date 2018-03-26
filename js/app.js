@@ -24,6 +24,7 @@ document.querySelector('#deck').addEventListener('click', function (e) {
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
             stopWatch.stopTimer();
             alert("You Win!!  You made " + gameState.moves + " moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!");
+            console.log("You have win");
         }
     }
 });
@@ -112,6 +113,12 @@ function reset() {
 function resetUI() {
     document.querySelector('#timer span').textContent = "0.000";
     document.querySelector('#moves span').textContent = 0;
+    const stars = document.querySelectorAll('#stars i');
+    stars.forEach(
+        function(star) {
+            star.textContent="star";
+        }
+    )
 }
 
 const gameState = {
