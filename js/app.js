@@ -92,10 +92,10 @@ const stopWatch = {
     },
     startTimer: function () {
         this.startTime = Date.now();
-        setInterval(this.timer, 10);
+        stopWatch.timerInstance = setInterval(this.timer, 10);
     },
     stopTimer: function () {
-        clearInterval(this.timer);
+        clearInterval(stopWatch.timerInstance);
     }
 }
 
@@ -110,7 +110,7 @@ function reset() {
 }
 
 function resetUI() {
-    document.querySelector('#timer span').textContent = 0.000;
+    document.querySelector('#timer span').textContent = "0.000";
     document.querySelector('#moves span').textContent = 0;
 }
 
