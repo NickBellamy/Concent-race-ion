@@ -97,6 +97,25 @@ ul {
     margin: auto;
 }
 
+#modal {
+    background: rgba(0,0,0,0.5);
+    display: none;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+#modal_content {
+    background: white;
+    max-width: 800px;
+    margin: 15% auto;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+}
+
 @media screen and (min-width: 400px) {
     #container {
         width: 400px;

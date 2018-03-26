@@ -33,6 +33,7 @@ document.querySelector('#deck').addEventListener('click', function (e) {
             }, 500);
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
             stopWatch.stopTimer();
+            Ui.showModal();
             alert("You Win!!  You made " + gameState.moves + " moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!");
         }
     }
@@ -41,6 +42,15 @@ document.querySelector('#deck').addEventListener('click', function (e) {
 // Event handler for the Restart button
 document.querySelector('#restart a').addEventListener('click', function (e) {
     e.preventDefault;
+    reset();
+})
+
+// Modal event handler
+document.querySelector('.close_modal').addEventListener('click', function () {
+    document.querySelector('#modal').style.display = 'none';
+})
+
+document.querySelector('.play_again').addEventListener('click', function () {
     reset();
 })
 
@@ -131,6 +141,12 @@ const Ui = {
         firstStar.classList.remove('full_star');
         firstStar.classList.add('empty_star');
         firstStar.textContent = "star_border";
+    },
+    showModal: function () {
+        document.querySelector('#final_score').innerHTML = document.querySelector('#stars').innerHTML;
+        document.querySelector('#winning_message').innerHTML =
+            "You made " + gameState.moves + " moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!";
+        document.querySelector('#modal').style.display = "block";
     },
     reset: function () {
         document.querySelector('#timer span').textContent = "0.000";
