@@ -24,7 +24,6 @@ document.querySelector('#deck').addEventListener('click', function (e) {
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
             stopWatch.stopTimer();
             alert("You Win!!  You made " + gameState.moves + " moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!");
-            console.log("You have win");
         }
     }
 });
@@ -102,24 +101,32 @@ const stopWatch = {
 
 function reset() {
     gameState.reset();
+    Ui.reset();
     flipCardsDown();
-    resetUI();
     shuffledCards = shuffle(cards);
     randomisedLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
     // setTimeout delays dealing until the flip animation has finished flipping cards face down
     setTimeout(function () { deal(shuffledCards, randomisedLocations) }, 500);
 }
 
-function resetUI() {
-    document.querySelector('#timer span').textContent = "0.000";
-    document.querySelector('#moves span').textContent = 0;
-    const stars = document.querySelectorAll('#stars i');
-    stars.forEach(
-        function(star) {
-            star.textContent="star";
-        }
-    )
+/* UI */
+
+const Ui = {
+    updateMoveCount: function (moves) {
+        document.querySelector('#moves span').textContent = moves;
+    },
+    reset: function () {
+        document.querySelector('#timer span').textContent = "0.000";
+        document.querySelector('#moves span').textContent = 0;
+        const stars = document.querySelectorAll('#stars i');
+        stars.forEach(
+            function (star) {
+                star.textContent = "star";
+            }
+        )
+    }
 }
+
 
 const gameState = {
     CLICKRESULT: {
@@ -152,8 +159,8 @@ const gameState = {
             this.cardId2 = clickedCard;
         }
     },
-    incrementMoveCount: function() {
-        document.querySelector('#moves span').textContent = ++this.moves;
+    incrementMoveCount: function () {
+        Ui.updateMoveCount(++this.moves);
     },
     reset: function () {
         this.moves = 0;
