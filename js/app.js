@@ -100,6 +100,7 @@ const stopWatch = {
 }
 
 function reset() {
+    stopWatch.stopTimer();
     gameState.reset();
     Ui.reset();
     flipCardsDown();
