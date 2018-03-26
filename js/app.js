@@ -1,3 +1,13 @@
+/* Game Settings */
+
+// Sets the threshold move number for decrementing the star rating.
+// Game starts with player on 3 stars, the star rating decreases by one star
+// on the following move numbers until the rating reaches one star.
+const settings = {
+    TWOSTARS: 10,
+    ONESTAR: 15,
+}
+
 /* Event Handlers */
 
 // Flip card over on click if face down
@@ -116,12 +126,20 @@ const Ui = {
     updateMoveCount: function (moves) {
         document.querySelector('#moves span').textContent = moves;
     },
+    removeStar: function () {
+        const firstStar = document.querySelector('.full_star');
+        firstStar.classList.remove('full_star');
+        firstStar.classList.add('empty_star');
+        firstStar.textContent = "star_border";
+    },
     reset: function () {
         document.querySelector('#timer span').textContent = "0.000";
         document.querySelector('#moves span').textContent = 0;
         const stars = document.querySelectorAll('#stars i');
         stars.forEach(
             function (star) {
+                star.classList.remove('empty_star');
+                star.classList.add('full_star');
                 star.textContent = "star";
             }
         )
@@ -162,6 +180,9 @@ const gameState = {
     },
     incrementMoveCount: function () {
         Ui.updateMoveCount(++this.moves);
+        if (this.moves === settings.TWOSTARS || this.moves === settings.ONESTAR) {
+            Ui.removeStar();
+        }
     },
     reset: function () {
         this.moves = 0;
