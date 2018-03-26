@@ -7,6 +7,14 @@ ul {
     padding: 0;
 }
 
+footer {
+    bottom: 0;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
 .card_container,
 .front,
 .back {
@@ -75,7 +83,8 @@ ul {
 }
 
 .back {
-    background: blue;
+    background: white;
+    background-size: contain;
     transform: rotateY(180deg);
 }
 

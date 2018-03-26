@@ -6,6 +6,28 @@
 const settings = {
     TWOSTARS: 10,
     ONESTAR: 15,
+    // List of cards to play with
+    CARDS: ["Alain_Prost.png",
+        "Gunnar_Nilsson.png",
+        "Piers_Courage.png",
+        "Ayrton_Senna.png",
+        "Jackie_Stewart.png",
+        "Roger_Williamson.png",
+        "Damon_Hill.png",
+        "James_Hunt.png",
+        "Roland_Ratzenber.png",
+        "David_Purley.png",
+        "Jody_Scheckter.png",
+        "Rolf_Stommelen.png",
+        "Francois_Cevert.png",
+        "Maria_de_Villota.png",
+        "Ronnie_Peterson.png",
+        "Gerhard_Berger.png",
+        "Mario_Andretti.png",
+        "Stefan_Bellof.png",
+        "Gilles_Villeneuve.png",
+        "Niki_Lauda.png",
+        "Tom_Pryce.png"]
 }
 
 /* Event Handlers */
@@ -34,7 +56,6 @@ document.querySelector('#deck').addEventListener('click', function (e) {
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
             stopWatch.stopTimer();
             Ui.showModal();
-            alert("You Win!!  You made " + gameState.moves + " moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!");
         }
     }
 });
@@ -80,9 +101,9 @@ function deal(cards, locations) {
         const currentCard = cards[i];
         const locationOne = document.querySelector('.card_container:nth-child(' + locations[i] + ')');
         const locationTwo = document.querySelector('.card_container:nth-child(' + locations[i + 8] + ')');
-        locationOne.querySelector('.back').textContent = currentCard;
+        locationOne.querySelector('.back').style.backgroundImage = 'url(./img/' + currentCard + ')';
         locationOne.querySelector('.card').dataset.identifier = i;
-        locationTwo.querySelector('.back').textContent = currentCard;
+        locationTwo.querySelector('.back').style.backgroundImage = 'url(./img/' + currentCard + ')';
         locationTwo.querySelector('.card').dataset.identifier = i;
     }
 }
@@ -124,7 +145,7 @@ function reset() {
     gameState.reset();
     Ui.reset();
     flipCardsDown();
-    shuffledCards = shuffle(cards);
+    shuffledCards = shuffle(settings.CARDS);
     randomisedLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
     // setTimeout delays dealing until the flip animation has finished flipping cards face down
     setTimeout(function () { deal(shuffledCards, randomisedLocations) }, 500);
@@ -207,10 +228,5 @@ const gameState = {
         this.cardId2 = null;
     }
 }
-
-/* Main program loop */
-
-// Can be any length - only 8 will be chosen
-let cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 reset();
