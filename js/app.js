@@ -78,8 +78,7 @@ function flipCardsDown() {
 }
 
 function reset() {
-    gameState.falseMoves = 0;
-    gameState.matchCount = 0;
+    gameState.reset();
     flipCardsDown();
     shuffledCards = shuffle(cards);
     randomisedLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
@@ -110,7 +109,7 @@ const gameState = {
             return this.CLICKRESULT.NOMATCH;
         }
     },
-    // Stores clicked card id and returns the value location in which it is stored
+    // Stores clicked card id
     storeCardId: function (clickedCard) {
         if (this.cardId1 === null || this.cardId2 !== null) {
             this.cardId1 = clickedCard;
@@ -118,6 +117,12 @@ const gameState = {
         } else {
             this.cardId2 = clickedCard;
         }
+    },
+    reset: function () {
+        this.falseMoves = 0;
+        this.matchCount = 0;
+        this.cardId1 = null;
+        this.cardId2 = null;
     }
 }
 
