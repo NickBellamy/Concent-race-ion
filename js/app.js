@@ -5,12 +5,16 @@ document.querySelector('#deck').addEventListener('click', function (e) {
     const clickedCard = e.target.parentNode;
     // Only true if card is face down ("flipped" class not applied)
     if (clickedCard.classList.value === "card") {
+        // cardId1 is only null at the beginning of the game
+        if (gameState.cardId1 === null) {
+            stopWatch.startTimer();
+        }
         flipCard(clickedCard);
         gameState.storeCardId(clickedCard.dataset.identifier);
 
         let clickResult = gameState.checkMatch();
 
-        if(clickResult === gameState.CLICKRESULT.NOMATCH) {
+        if (clickResult === gameState.CLICKRESULT.NOMATCH) {
             setTimeout(function () {
                 flipCard(document.querySelector('.card[data-identifier="' + gameState.cardId1 + '"].flipped'))
             }, 500);
@@ -18,7 +22,8 @@ document.querySelector('#deck').addEventListener('click', function (e) {
                 flipCard(document.querySelector('.card[data-identifier="' + gameState.cardId2 + '"].flipped'))
             }, 500);
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
-            alert("You Win!!  You made " + gameState.falseMoves + " false moves.");
+            stopWatch.stopTimer();
+            alert("You Win!!  You made " + gameState.falseMoves + " false moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!");
         }
     }
 });
@@ -75,6 +80,23 @@ function flipCardsDown() {
             flipCard(card);
         }
     )
+}
+
+/* Timer */
+
+const stopWatch = {
+    startTime: null,
+    timer: function () {
+        const elapsedTime = Date.now() - stopWatch.startTime;
+        document.querySelector("#timer span").innerHTML = (elapsedTime / 1000).toFixed(3);
+    },
+    startTimer: function () {
+        this.startTime = Date.now();
+        setInterval(this.timer, 10);
+    },
+    stopTimer: function () {
+        clearInterval(this.timer);
+    }
 }
 
 function reset() {
