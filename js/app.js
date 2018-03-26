@@ -2,31 +2,23 @@
 
 // Flip card over on click if face down
 document.querySelector('#deck').addEventListener('click', function (e) {
+    const clickedCard = e.target.parentNode;
     // Only true if card is face down ("flipped" class not applied)
-    if (e.target.parentNode.classList.value === "card") {
-        flipCard(e.target.parentNode);
-        if (matchState.value1 === null || matchState.value2 !== null) {
-            matchState.value1 = e.target.parentNode.dataset.identifier;
-            matchState.value2 = null;
-        } else {
-            matchState.value2 = e.target.parentNode.dataset.identifier;
-            // If match is made
-            if (matchState.checkMatch()) {
-                matchState.matchCount++;
-                // Check for win
-                if (matchState.matchCount >= 8) {
-                    alert("You Win!!  You made " + matchState.falseMoves + " false moves.");
-                }
-            // Else checkMatch is not true; flip all cards that are "flipped" with the identifier values in matchState.
-            } else {
-                matchState.falseMoves++;
-                setTimeout(function () {
-                    flipCard(document.querySelector('.card[data-identifier="' + matchState.value1 + '"].flipped'))
-                }, 500);
-                setTimeout(function () {
-                    flipCard(document.querySelector('.card[data-identifier="' + matchState.value2 + '"].flipped'))
-                }, 500);
-            }
+    if (clickedCard.classList.value === "card") {
+        flipCard(clickedCard);
+        gameState.storeCardId(clickedCard.dataset.identifier);
+
+        let clickResult = gameState.checkMatch();
+
+        if(clickResult === gameState.CLICKRESULT.NOMATCH) {
+            setTimeout(function () {
+                flipCard(document.querySelector('.card[data-identifier="' + gameState.cardId1 + '"].flipped'))
+            }, 500);
+            setTimeout(function () {
+                flipCard(document.querySelector('.card[data-identifier="' + gameState.cardId2 + '"].flipped'))
+            }, 500);
+        } else if (clickResult === gameState.CLICKRESULT.WIN) {
+            alert("You Win!!  You made " + gameState.falseMoves + " false moves.");
         }
     }
 });
@@ -86,8 +78,8 @@ function flipCardsDown() {
 }
 
 function reset() {
-    matchState.falseMoves = 0;
-    matchState.matchCount = 0;
+    gameState.falseMoves = 0;
+    gameState.matchCount = 0;
     flipCardsDown();
     shuffledCards = shuffle(cards);
     randomisedLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
@@ -95,13 +87,37 @@ function reset() {
     setTimeout(function () { deal(shuffledCards, randomisedLocations) }, 500);
 }
 
-const matchState = {
+const gameState = {
+    CLICKRESULT: {
+        MATCH: "Match",
+        NULLMATCH: "Null Match",
+        NOMATCH: "No Match",
+        WIN: "Win"
+    },
     falseMoves: 0,
     matchCount: 0,
-    value1: null,
-    value2: null,
+    cardId1: null,
+    cardId2: null,
     checkMatch: function () {
-        return this.value1 === this.value2 ? true : false;
+        if (this.cardId2 === null) {
+            return this.CLICKRESULT.NULLMATCH;
+        } else if (this.cardId1 === this.cardId2) {
+            this.matchCount++;
+            console.log(this.matchCount);
+            return this.matchCount >= 8 ? this.CLICKRESULT.WIN : this.CLICKRESULT.MATCH;
+        } else {
+            this.falseMoves++;
+            return this.CLICKRESULT.NOMATCH;
+        }
+    },
+    // Stores clicked card id and returns the value location in which it is stored
+    storeCardId: function (clickedCard) {
+        if (this.cardId1 === null || this.cardId2 !== null) {
+            this.cardId1 = clickedCard;
+            this.cardId2 = null;
+        } else {
+            this.cardId2 = clickedCard;
+        }
     }
 }
 
