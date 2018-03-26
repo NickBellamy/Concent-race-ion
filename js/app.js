@@ -23,7 +23,7 @@ document.querySelector('#deck').addEventListener('click', function (e) {
             }, 500);
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
             stopWatch.stopTimer();
-            alert("You Win!!  You made " + gameState.falseMoves + " false moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!");
+            alert("You Win!!  You made " + gameState.moves + " moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!");
         }
     }
 });
@@ -115,7 +115,7 @@ const gameState = {
         NOMATCH: "No Match",
         WIN: "Win"
     },
-    falseMoves: 0,
+    moves: 0,
     matchCount: 0,
     cardId1: null,
     cardId2: null,
@@ -123,12 +123,10 @@ const gameState = {
         if (this.cardId2 === null) {
             return this.CLICKRESULT.NULLMATCH;
         } else if (this.cardId1 === this.cardId2) {
-            this.matchCount++;
-            this.updateMoveCount();
-            return this.matchCount >= 8 ? this.CLICKRESULT.WIN : this.CLICKRESULT.MATCH;
+            this.incrementMoveCount();
+            return ++this.matchCount >= 8 ? this.CLICKRESULT.WIN : this.CLICKRESULT.MATCH;
         } else {
-            this.falseMoves++;
-            this.updateMoveCount();
+            this.incrementMoveCount();
             return this.CLICKRESULT.NOMATCH;
         }
     },
@@ -141,11 +139,11 @@ const gameState = {
             this.cardId2 = clickedCard;
         }
     },
-    updateMoveCount: function() {
-        document.querySelector('#moves span').textContent = this.falseMoves + this.matchCount;
+    incrementMoveCount: function() {
+        document.querySelector('#moves span').textContent = ++this.moves;
     },
     reset: function () {
-        this.falseMoves = 0;
+        this.moves = 0;
         this.matchCount = 0;
         this.cardId1 = null;
         this.cardId2 = null;
