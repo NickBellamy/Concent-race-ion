@@ -73,11 +73,16 @@ document.querySelector('#restart a').addEventListener('click', function (e) {
 })
 
 // Modal event handler
-document.querySelector('.close_modal').addEventListener('click', function () {
+document.querySelector('#modal, #play_again_no').addEventListener('click', function () {
     document.querySelector('#modal').style.display = 'none';
 })
 
-document.querySelector('.play_again').addEventListener('click', function () {
+/*document.querySelector('#play_again_no').addEventListener('click', function () {
+    document.querySelector('#modal').style.display = 'none';
+})*/
+
+document.querySelector('#play_again_yes').addEventListener('click', function () {
+    document.querySelector('#modal').style.display = 'none';
     reset();
 })
 
@@ -172,7 +177,7 @@ const Ui = {
     showModal: function () {
         document.querySelector('#final_score').innerHTML = document.querySelector('#stars').innerHTML;
         document.querySelector('#winning_message').innerHTML =
-            "You made " + gameState.moves + " moves and finished in " + document.querySelector("#timer span").innerHTML + "seconds!";
+            "You made <b>" + gameState.moves + "</b> moves and finished in <b>" + document.querySelector("#timer span").innerHTML + "</b> seconds!";
         document.querySelector('#modal').style.display = "block";
     },
     reset: function () {
