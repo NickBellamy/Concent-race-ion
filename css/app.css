@@ -54,8 +54,8 @@ footer {
     .card_container,
     .front,
     .back {
-        height: 130px;
-        width: 130px;
+        height: 110px;
+        width: 110px;
     }
 }
 
@@ -207,7 +207,7 @@ footer {
 
 @media screen and (min-width: 600px) {
     #container {
-        width: 600px;
+        width: 520px;
     }
 }
 
