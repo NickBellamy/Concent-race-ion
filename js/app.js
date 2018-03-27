@@ -94,17 +94,21 @@ function shuffle(array) {
     return array;
 }
 
-// Deal 2 of each of the first 8 cards in cards, to each location in locations
-// dataset.identifier property is used to identify matching pairs of cards
-function deal(cards, locations) {
+// Deal 2 of each of the first 8 cards in cards array, to two random board locations
+// dataset.identifier property is set to identify matching pairs of cards during the game
+function deal() {
+    const shuffledCards = shuffle(settings.CARDS)
+    const shuffledLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+
     for (let i = 0; i < 8; i++) {
-        const currentCard = cards[i];
-        const locationOne = document.querySelector('.card-container:nth-child(' + locations[i] + ')');
-        const locationTwo = document.querySelector('.card-container:nth-child(' + locations[i + 8] + ')');
-        locationOne.querySelector('.back').style.backgroundImage = 'url(./img/' + currentCard + ')';
-        locationOne.querySelector('.card').dataset.identifier = i;
-        locationTwo.querySelector('.back').style.backgroundImage = 'url(./img/' + currentCard + ')';
-        locationTwo.querySelector('.card').dataset.identifier = i;
+        const currentCard = shuffledCards[i];
+        const locations = [];
+        locations[0] = document.querySelector('.card-container:nth-child(' + shuffledLocations[i] + ')');
+        locations[1] = document.querySelector('.card-container:nth-child(' + shuffledLocations[i + 8] + ')');
+        locations.forEach(function (location) {
+            location.querySelector('.back').style.backgroundImage = 'url(./img/' + currentCard + ')';
+            location.querySelector('.card').dataset.identifier = i;
+        })
     }
 }
 
@@ -118,8 +122,8 @@ function flipCardsDown() {
     const flippedCards = document.querySelectorAll('.flipped');
     flippedCards.forEach(
         function (card) {
-            flipCard(card);
-        }
+        flipCard(card);
+    }
     )
 }
 
@@ -146,13 +150,7 @@ function reset() {
     Ui.reset();
     flipCardsDown();
     // setTimeout delays dealing until the flip animation has finished flipping cards face down
-    setTimeout(function () { beginGame() }, 350);
-}
-
-function beginGame() {
-    shuffledCards = shuffle(settings.CARDS);
-    randomisedLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-    deal(shuffledCards, randomisedLocations)
+    setTimeout(function () { deal() }, 350);
 }
 
 /* UI */
@@ -233,4 +231,4 @@ const gameState = {
     }
 }
 
-beginGame();
+deal();
