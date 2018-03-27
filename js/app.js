@@ -47,18 +47,17 @@ document.querySelector('#deck').addEventListener('click', function (e) {
         // For a NOMATCH result below, these local copies can be used as flipCard target rather than relying
         // on the values in gameState which will have changed if user has clicked another card within the 500ms
         // setTimeout interval.  This ensures on a NOMATCH, the correct cards will be flipped back face down.
-        const firstClickedCard = gameState.cardId1;
-        const secondClickedCard = gameState.cardId2;
+        const clickedCards = [gameState.cardId1, gameState.cardId2];
 
-        let clickResult = gameState.checkMatch();
+        const clickResult = gameState.checkMatch();
 
         if (clickResult === gameState.CLICKRESULT.NOMATCH) {
-            setTimeout(function () {
-                flipCard(document.querySelector('.card[data-identifier="' + firstClickedCard + '"].flipped'))
-            }, 500);
-            setTimeout(function () {
-                flipCard(document.querySelector('.card[data-identifier="' + secondClickedCard + '"].flipped'))
-            }, 500);
+            // Flip both cards face down briefly after both being revealed.
+            clickedCards.forEach(function (card) {
+                setTimeout(function () {
+                    flipCard(document.querySelector('.card[data-identifier="' + card + '"].flipped'))
+                }, 500);
+            })
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
             stopWatch.stopTimer();
             Ui.showModal();
