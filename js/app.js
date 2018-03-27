@@ -176,7 +176,7 @@ const Ui = {
         const firstStar = document.querySelector('.full-star');
         firstStar.classList.remove('full-star');
         firstStar.classList.add('empty-star');
-        firstStar.textContent = "star-border";
+        firstStar.textContent = "star_border";
     },
     showModal: function () {
         document.querySelector('#final-score').innerHTML = document.querySelector('#stars').innerHTML;
