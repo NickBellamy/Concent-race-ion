@@ -70,13 +70,17 @@ document.querySelector('#deck').addEventListener('click', function (e) {
 });
 
 // Event handler for resetting the game
-document.querySelector('#restart, #play-again-yes').addEventListener('click', function (e) {
-    reset();
+document.querySelectorAll('#restart, #play-again-yes').forEach(function (resetItem) {
+    resetItem.addEventListener('click', function () {
+        reset();
+    })
 })
 
 // Event handler for closing the modal
-document.querySelector('#modal, #play-again-no, #play-again-yes').addEventListener('click', function () {
-    ui.hideModal();
+document.querySelectorAll('#modal, #play-again-no, #play-again-yes').forEach(function (closeModalItem) {
+    closeModalItem.addEventListener('click', function () {
+        ui.hideModal();
+    })
 })
 
 
@@ -156,7 +160,7 @@ const stopWatch = {
 
 // Responsible for updating UI elements
 const ui = {
-    updateTime: function(time) {
+    updateTime: function (time) {
         document.querySelector('#timer span').innerHTML = (time / 1000).toFixed(3);
     },
     updateMoveCount: function (moves) {
