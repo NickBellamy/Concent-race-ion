@@ -1,28 +1,20 @@
+/* Main Elements */
+
 body {
     font-family: 'Mina', sans-serif;
     margin: 0;
 }
 
+#container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 320px;
+}
+
 h1 {
     font-size: 36px;
-}
-
-@media screen and (min-width: 800px) {
-    h1 {
-        font-size: 40px;
-    }
-}
-
-@media screen and (min-width: 1920px) {
-    h1 {
-        font-size: 44px;
-    }
-
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
 }
 
 footer {
@@ -34,63 +26,24 @@ footer {
     width: 100%;
 }
 
-.card_container,
-.front,
-.back {
-    height: 74px;
-    width: 74px;
-}
+/* Game Board */
 
-@media screen and (min-width: 400px) {
-    .card_container,
-    .front,
-    .back {
-        height: 90px;
-        width: 90px;
-    }
-}
-
-@media screen and (min-width: 600px) {
-    .card_container,
-    .front,
-    .back {
-        height: 110px;
-        width: 110px;
-    }
-}
-
-@media screen and (min-width: 1920px) {
-    .card_container,
-    .front,
-    .back {
-        height: 150px;
-        width: 150px;
-    }
+#deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
 }
 
 .card_container {
+    height: 74px;
     margin: 3px;
-}
-
-@media screen and (min-width: 400px) {
-    .card_container {
-        margin: 5px;
-    }
-}
-
-@media screen and (min-width: 600px) {
-    .card_container {
-        margin: 10px;
-    }
-}
-
-@media screen and (min-width: 1920px) {
-    .card_container {
-        margin: 12px;
-    }
+    width: 74px;
 }
 
 .card {
+    height: 100%;
     transform-style: preserve-3d;
     transition: 0.7s;
     position: relative;
@@ -112,53 +65,36 @@ footer {
     backface-visibility: hidden;
     border-radius: 10px;
     box-shadow: 5px 5px 20px #666;
+    height: 100%;
     position: absolute;
+    width: 100%;
 }
 
 .flipped {
     transform: rotateY(180deg);
 }
 
+/* Scoring area */
+
 .full_star {
     color: gold;
-    text-shadow: 0 0 1px black;
+    text-shadow: 0 0 1px #000;
 }
 
 .empty_star {
     color: #aaa;
 }
 
-#container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 320px;
-    margin: auto;
-}
-
 #score_panel {
     display: flex;
     font-family: 'Source Code Pro', monospace;
-    justify-content: space-between;
     width: 100%;
 }
 
-@media screen and (min-width: 600px){
-    #score_panel {
-        font-size: 22px;
-    }
-}
-
 #score_panel div {
-    width: 25%;
     display: flex;
     justify-content: center;
-}
-
-@media screen and (min-width: 600px){
-    #score_panel .material-icons {
-        font-size: 30px;
-    }
+    width: 25%;
 }
 
 #moves span,
@@ -169,6 +105,8 @@ footer {
 #moves span {
     text-align: right;
 }
+
+/* Modal */
 
 #modal {
     background: rgba(0,0,0,0.5);
@@ -199,9 +137,17 @@ footer {
     font-size: 50px;
 }
 
+/* Media Queries */
+
 @media screen and (min-width: 400px) {
     #container {
         width: 400px;
+    }
+
+    .card_container {
+        height: 90px;
+        margin: 5px;
+        width: 90px;
     }
 }
 
@@ -209,16 +155,40 @@ footer {
     #container {
         width: 520px;
     }
-}
 
-@media screen and (min-width: 1920px) {
-    #container {
-        width: 700px;
+    #score_panel {
+        font-size: 22px;
+    }
+
+    #score_panel .material-icons {
+        font-size: 30px;
+    }
+
+    .card_container {
+        height: 110px;
+        margin: 10px;
+        width: 100px;
     }
 }
 
-#deck {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+@media screen and (min-width: 800px) {
+    h1 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    h1 {
+        font-size: 44px;
+    }
+
+    #container {
+        width: 700px;
+    }
+
+    .card_container {
+        height: 150px;
+        margin: 12px;
+        width: 150px;
+    }
 }
