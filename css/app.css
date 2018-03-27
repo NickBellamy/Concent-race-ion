@@ -7,6 +7,20 @@ h1 {
     font-size: 36px;
 }
 
+@media screen and (min-width: 800px) {
+    h1 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    h1 {
+        font-size: 44px;
+        margin-bottom: 12px;
+    }
+
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -73,7 +87,7 @@ footer {
 
 @media screen and (min-width: 1920px) {
     .card_container {
-        margin: 15px;
+        margin: 11px;
     }
 }
 
@@ -124,7 +138,37 @@ footer {
 }
 
 #score_panel {
+    display: flex;
     font-family: 'Source Code Pro', monospace;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media screen and (min-width: 600px){
+    #score_panel {
+        font-size: 22px;
+    }
+}
+
+#score_panel div {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width: 600px){
+    #score_panel .material-icons {
+        font-size: 30px;
+    }
+}
+
+#moves span,
+#moves .material-icons {
+    width: 50%;
+}
+
+#moves span {
+    text-align: right;
 }
 
 #modal {
@@ -172,12 +216,6 @@ footer {
     #container {
         width: 800px;
     }
-}
-
-#score_panel {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
 }
 
 #deck {
