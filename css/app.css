@@ -1,7 +1,7 @@
 /* Main Elements */
 
 body {
-    font-family: 'Mina', sans-serif;
+    font-family: "Mina", sans-serif;
     margin: 0;
 }
 
@@ -36,7 +36,7 @@ footer {
     padding: 0;
 }
 
-.card_container {
+.card-container {
     height: 74px;
     margin: 3px;
     width: 74px;
@@ -55,7 +55,7 @@ footer {
 }
 
 .back {
-    background: white;
+    background: #fff;
     background-size: contain;
     transform: rotateY(180deg);
 }
@@ -76,22 +76,22 @@ footer {
 
 /* Scoring area */
 
-.full_star {
+.full-star {
     color: gold;
     text-shadow: 0 0 1px #000;
 }
 
-.empty_star {
+.empty-star {
     color: #aaa;
 }
 
-#score_panel {
+#score-panel {
     display: flex;
-    font-family: 'Source Code Pro', monospace;
+    font-family: "Source Code Pro", monospace;
     width: 100%;
 }
 
-#score_panel div {
+#score-panel div {
     display: flex;
     justify-content: center;
     width: 25%;
@@ -118,8 +118,8 @@ footer {
     z-index: 3;
 }
 
-#modal_content {
-    background: white;
+#modal-content {
+    background: #fff;
     border-radius: 20px;
     max-width: 800px;
     margin: 15% auto;
@@ -128,12 +128,12 @@ footer {
     width: 80%;
 }
 
-#modal_content span {
+#modal-content span {
     cursor: pointer;
     font-size: 25px;
 }
 
-#final_score .material-icons {
+#final-score .material-icons {
     font-size: 50px;
 }
 
@@ -144,7 +144,7 @@ footer {
         width: 400px;
     }
 
-    .card_container {
+    .card-container {
         height: 90px;
         margin: 5px;
         width: 90px;
@@ -156,15 +156,15 @@ footer {
         width: 520px;
     }
 
-    #score_panel {
+    #score-panel {
         font-size: 22px;
     }
 
-    #score_panel .material-icons {
+    #score-panel .material-icons {
         font-size: 30px;
     }
 
-    .card_container {
+    .card-container {
         height: 110px;
         margin: 10px;
         width: 100px;
@@ -186,7 +186,7 @@ footer {
         width: 700px;
     }
 
-    .card_container {
+    .card-container {
         height: 150px;
         margin: 12px;
         width: 150px;

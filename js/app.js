@@ -73,7 +73,7 @@ document.querySelector('#restart a').addEventListener('click', function (e) {
 })
 
 // Modal event handler
-document.querySelector('#modal, #play_again_no').addEventListener('click', function () {
+document.querySelector('#modal, #play-again-no').addEventListener('click', function () {
     document.querySelector('#modal').style.display = 'none';
 })
 
@@ -81,7 +81,7 @@ document.querySelector('#modal, #play_again_no').addEventListener('click', funct
     document.querySelector('#modal').style.display = 'none';
 })*/
 
-document.querySelector('#play_again_yes').addEventListener('click', function () {
+document.querySelector('#play-again-yes').addEventListener('click', function () {
     document.querySelector('#modal').style.display = 'none';
     reset();
 })
@@ -110,8 +110,8 @@ function shuffle(array) {
 function deal(cards, locations) {
     for (let i = 0; i < 8; i++) {
         const currentCard = cards[i];
-        const locationOne = document.querySelector('.card_container:nth-child(' + locations[i] + ')');
-        const locationTwo = document.querySelector('.card_container:nth-child(' + locations[i + 8] + ')');
+        const locationOne = document.querySelector('.card-container:nth-child(' + locations[i] + ')');
+        const locationTwo = document.querySelector('.card-container:nth-child(' + locations[i + 8] + ')');
         locationOne.querySelector('.back').style.backgroundImage = 'url(./img/' + currentCard + ')';
         locationOne.querySelector('.card').dataset.identifier = i;
         locationTwo.querySelector('.back').style.backgroundImage = 'url(./img/' + currentCard + ')';
@@ -173,14 +173,14 @@ const Ui = {
         document.querySelector('#moves span').textContent = moves;
     },
     removeStar: function () {
-        const firstStar = document.querySelector('.full_star');
-        firstStar.classList.remove('full_star');
-        firstStar.classList.add('empty_star');
-        firstStar.textContent = "star_border";
+        const firstStar = document.querySelector('.full-star');
+        firstStar.classList.remove('full-star');
+        firstStar.classList.add('empty-star');
+        firstStar.textContent = "star-border";
     },
     showModal: function () {
-        document.querySelector('#final_score').innerHTML = document.querySelector('#stars').innerHTML;
-        document.querySelector('#winning_message').innerHTML =
+        document.querySelector('#final-score').innerHTML = document.querySelector('#stars').innerHTML;
+        document.querySelector('#winning-message').innerHTML =
             "You made <b>" + gameState.moves + "</b> moves and finished in <b>" + document.querySelector("#timer span").innerHTML + "</b> seconds!";
         document.querySelector('#modal').style.display = "block";
     },
@@ -190,8 +190,8 @@ const Ui = {
         const stars = document.querySelectorAll('#stars i');
         stars.forEach(
             function (star) {
-                star.classList.remove('empty_star');
-                star.classList.add('full_star');
+                star.classList.remove('empty-star');
+                star.classList.add('full-star');
                 star.textContent = "star";
             }
         )
