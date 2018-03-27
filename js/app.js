@@ -7,7 +7,8 @@ const settings = {
     // Number of moves in which player is awarded 1 star
     ONESTAR: 15,
     // List of cards to play with
-    CARDS: ['Alain_Prost.png',
+    CARDS: [
+        'Alain_Prost.png',
         'Gunnar_Nilsson.png',
         'Piers_Courage.png',
         'Ayrton_Senna.png',
@@ -27,7 +28,8 @@ const settings = {
         'Stefan_Bellof.png',
         'Gilles_Villeneuve.png',
         'Niki_Lauda.png',
-        'Tom_Pryce.png']
+        'Tom_Pryce.png'
+    ]
 }
 
 
@@ -67,7 +69,7 @@ document.querySelector('#deck').addEventListener('click', function (e) {
             ui.showModal();
         }
     }
-});
+})
 
 // Event handler for resetting the game
 document.querySelectorAll('#restart, #play-again-yes').forEach(function (resetItem) {
@@ -196,7 +198,7 @@ const ui = {
 }
 
 
-/* State Engine */
+/* Game Engine */
 
 
 const gameState = {
