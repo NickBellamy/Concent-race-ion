@@ -120,11 +120,9 @@ function flipCard(card) {
 // Flip all face up cards, face down
 function flipCardsDown() {
     const flippedCards = document.querySelectorAll('.flipped');
-    flippedCards.forEach(
-        function (card) {
+    flippedCards.forEach(function (card) {
         flipCard(card);
-    }
-    )
+    })
 }
 
 /* Timer */
@@ -168,7 +166,7 @@ const Ui = {
     showModal: function () {
         document.querySelector('#final-score').innerHTML = document.querySelector('#stars').innerHTML;
         document.querySelector('#winning-message').innerHTML =
-            'You made <b>' + gameState.moves + '</b> moves and finished in <b>' + document.querySelector('#timer span').innerHTML + '</b> seconds!';
+            `You made <b> ${gameState.moves} </b> moves and finished in <b> ${document.querySelector('#timer span').innerHTML} </b> seconds!`;
         document.querySelector('#modal').style.display = 'block';
     },
     reset: function () {
