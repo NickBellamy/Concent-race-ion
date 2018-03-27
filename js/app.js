@@ -66,19 +66,14 @@ document.querySelector('#deck').addEventListener('click', function (e) {
     }
 });
 
-// Event handler for the Restart button
-document.querySelector('#restart').addEventListener('click', function (e) {
+// Event handler for resetting the game
+document.querySelector('#restart, #play-again-yes').addEventListener('click', function (e) {
     reset();
 })
 
-// Modal event handler
-document.querySelector('#modal, #play-again-no').addEventListener('click', function () {
+// Event handler for closing the modal
+document.querySelector('#modal, #play-again-no, #play-again-yes').addEventListener('click', function () {
     document.querySelector('#modal').style.display = 'none';
-})
-
-document.querySelector('#play-again-yes').addEventListener('click', function () {
-    document.querySelector('#modal').style.display = 'none';
-    reset();
 })
 
 /* Card Mechanics */
@@ -152,7 +147,7 @@ function reset() {
     Ui.reset();
     flipCardsDown();
     // setTimeout delays dealing until the flip animation has finished flipping cards face down
-    setTimeout(function () {beginGame()}, 350);
+    setTimeout(function () { beginGame() }, 350);
 }
 
 function beginGame() {
