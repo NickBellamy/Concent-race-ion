@@ -30,9 +30,11 @@ const settings = {
         'Tom_Pryce.png']
 }
 
+
 /* Event Handlers */
 
-// Flip card over on click if face down
+
+// Event handler for flipping cards
 document.querySelector('#deck').addEventListener('click', function (e) {
     const clickedCard = e.target.parentNode;
     // Only true if card is face down ("flipped" class not applied)
@@ -44,15 +46,16 @@ document.querySelector('#deck').addEventListener('click', function (e) {
         flipCard(clickedCard);
         gameState.storeCardId(clickedCard.dataset.identifier);
 
-        // For a NOMATCH result below, these local copies can be used as flipCard target rather than relying
+        // For a NOMATCH result below, these local card ids can be used as flipCard target rather than relying
         // on the values in gameState which will have changed if user has clicked another card within the 500ms
         // setTimeout interval.  This ensures on a NOMATCH, the correct cards will be flipped back face down.
         const clickedCards = [gameState.cardId1, gameState.cardId2];
 
+        // Returns a gamesState.CLICKRESULT
         const clickResult = gameState.checkMatch();
 
         if (clickResult === gameState.CLICKRESULT.NOMATCH) {
-            // Flip both cards face down briefly after both being revealed.
+            // Flip both cards face down briefly after (500ms) both being revealed.
             clickedCards.forEach(function (card) {
                 setTimeout(function () {
                     flipCard(document.querySelector('.card[data-identifier="' + card + '"].flipped'))
@@ -60,7 +63,8 @@ document.querySelector('#deck').addEventListener('click', function (e) {
             })
         } else if (clickResult === gameState.CLICKRESULT.WIN) {
             stopWatch.stopTimer();
-            Ui.showModal();
+            // Show win message
+            ui.showModal();
         }
     }
 });
@@ -72,10 +76,12 @@ document.querySelector('#restart, #play-again-yes').addEventListener('click', fu
 
 // Event handler for closing the modal
 document.querySelector('#modal, #play-again-no, #play-again-yes').addEventListener('click', function () {
-    document.querySelector('#modal').style.display = 'none';
+    ui.hideModal();
 })
 
+
 /* Card Mechanics */
+
 
 // Randomises the order of items in an array using the Fisher-Yates shuffle
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
@@ -90,7 +96,6 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
@@ -125,13 +130,16 @@ function flipCardsDown() {
     })
 }
 
+
 /* Timer */
+
 
 const stopWatch = {
     startTime: null,
+    // Calculates the interval since the timer started and passes the value to the UI to update
     timer: function () {
         const elapsedTime = Date.now() - stopWatch.startTime;
-        document.querySelector('#timer span').innerHTML = (elapsedTime / 1000).toFixed(3);
+        ui.updateTime(elapsedTime);
     },
     startTimer: function () {
         this.startTime = Date.now();
@@ -142,18 +150,15 @@ const stopWatch = {
     }
 }
 
-function reset() {
-    stopWatch.stopTimer();
-    gameState.reset();
-    Ui.reset();
-    flipCardsDown();
-    // setTimeout delays dealing until the flip animation has finished flipping cards face down
-    setTimeout(function () { deal() }, 350);
-}
 
 /* UI */
 
-const Ui = {
+
+// Responsible for updating UI elements
+const ui = {
+    updateTime: function(time) {
+        document.querySelector('#timer span').innerHTML = (time / 1000).toFixed(3);
+    },
     updateMoveCount: function (moves) {
         document.querySelector('#moves span').textContent = moves;
     },
@@ -168,6 +173,9 @@ const Ui = {
         document.querySelector('#winning-message').innerHTML =
             `You made <b> ${gameState.moves} </b> moves and finished in <b> ${document.querySelector('#timer span').innerHTML} </b> seconds!`;
         document.querySelector('#modal').style.display = 'block';
+    },
+    hideModal: function () {
+        document.querySelector('#modal').style.display = 'none';
     },
     reset: function () {
         document.querySelector('#timer span').textContent = '0.000';
@@ -184,6 +192,9 @@ const Ui = {
 }
 
 
+/* State Engine */
+
+
 const gameState = {
     CLICKRESULT: {
         MATCH: 'Match',
@@ -195,6 +206,7 @@ const gameState = {
     matchCount: 0,
     cardId1: null,
     cardId2: null,
+    // Returns CLICKRESULT based on match conditions
     checkMatch: function () {
         if (this.cardId2 === null) {
             return this.CLICKRESULT.NULLMATCH;
@@ -215,12 +227,15 @@ const gameState = {
             this.cardId2 = clickedCard;
         }
     },
+    // Increments move count and calls to UI to update move count on screen
+    // Then triggers UI to remove a star if move threshold in settings has been reached
     incrementMoveCount: function () {
-        Ui.updateMoveCount(++this.moves);
+        ui.updateMoveCount(++this.moves);
         if (this.moves === settings.TWOSTARS || this.moves === settings.ONESTAR) {
-            Ui.removeStar();
+            ui.removeStar();
         }
     },
+    // Reset gameState
     reset: function () {
         this.moves = 0;
         this.matchCount = 0;
@@ -228,5 +243,20 @@ const gameState = {
         this.cardId2 = null;
     }
 }
+
+// Resets entire application
+function reset() {
+    stopWatch.stopTimer();
+    gameState.reset();
+    ui.reset();
+    flipCardsDown();
+    // setTimeout delays dealing until the flip animation has finished flipping cards face down
+    // Note: 350ms is chosen as it is half of the transition duration of the flip effect
+    setTimeout(function () { deal() }, 350);
+}
+
+
+/* Begin Game */
+
 
 deal();
