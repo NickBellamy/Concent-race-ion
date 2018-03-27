@@ -1,33 +1,33 @@
 /* Game Settings */
 
-// Sets the threshold move number for decrementing the star rating.
-// Game starts with player on 3 stars, the star rating decreases by one star
-// on the following move numbers until the rating reaches one star.
+
 const settings = {
+    // Number of moves in which player is awarded 2 stars
     TWOSTARS: 10,
+    // Number of moves in which player is awarded 1 star
     ONESTAR: 15,
     // List of cards to play with
-    CARDS: ["Alain_Prost.png",
-        "Gunnar_Nilsson.png",
-        "Piers_Courage.png",
-        "Ayrton_Senna.png",
-        "Jackie_Stewart.png",
-        "Roger_Williamson.png",
-        "Damon_Hill.png",
-        "James_Hunt.png",
-        "Roland_Ratzenber.png",
-        "David_Purley.png",
-        "Jody_Scheckter.png",
-        "Rolf_Stommelen.png",
-        "Francois_Cevert.png",
-        "Maria_de_Villota.png",
-        "Ronnie_Peterson.png",
-        "Gerhard_Berger.png",
-        "Mario_Andretti.png",
-        "Stefan_Bellof.png",
-        "Gilles_Villeneuve.png",
-        "Niki_Lauda.png",
-        "Tom_Pryce.png"]
+    CARDS: ['Alain_Prost.png',
+        'Gunnar_Nilsson.png',
+        'Piers_Courage.png',
+        'Ayrton_Senna.png',
+        'Jackie_Stewart.png',
+        'Roger_Williamson.png',
+        'Damon_Hill.png',
+        'James_Hunt.png',
+        'Roland_Ratzenber.png',
+        'David_Purley.png',
+        'Jody_Scheckter.png',
+        'Rolf_Stommelen.png',
+        'Francois_Cevert.png',
+        'Maria_de_Villota.png',
+        'Ronnie_Peterson.png',
+        'Gerhard_Berger.png',
+        'Mario_Andretti.png',
+        'Stefan_Bellof.png',
+        'Gilles_Villeneuve.png',
+        'Niki_Lauda.png',
+        'Tom_Pryce.png']
 }
 
 /* Event Handlers */
@@ -36,7 +36,7 @@ const settings = {
 document.querySelector('#deck').addEventListener('click', function (e) {
     const clickedCard = e.target.parentNode;
     // Only true if card is face down ("flipped" class not applied)
-    if (clickedCard.classList.value === "card") {
+    if (clickedCard.classList.value === 'card') {
         // cardId1 is only null at the beginning of the game
         if (gameState.cardId1 === null) {
             stopWatch.startTimer();
@@ -67,8 +67,7 @@ document.querySelector('#deck').addEventListener('click', function (e) {
 });
 
 // Event handler for the Restart button
-document.querySelector('#restart a').addEventListener('click', function (e) {
-    e.preventDefault;
+document.querySelector('#restart').addEventListener('click', function (e) {
     reset();
 })
 
@@ -76,10 +75,6 @@ document.querySelector('#restart a').addEventListener('click', function (e) {
 document.querySelector('#modal, #play-again-no').addEventListener('click', function () {
     document.querySelector('#modal').style.display = 'none';
 })
-
-/*document.querySelector('#play_again_no').addEventListener('click', function () {
-    document.querySelector('#modal').style.display = 'none';
-})*/
 
 document.querySelector('#play-again-yes').addEventListener('click', function () {
     document.querySelector('#modal').style.display = 'none';
@@ -140,7 +135,7 @@ const stopWatch = {
     startTime: null,
     timer: function () {
         const elapsedTime = Date.now() - stopWatch.startTime;
-        document.querySelector("#timer span").innerHTML = (elapsedTime / 1000).toFixed(3);
+        document.querySelector('#timer span').innerHTML = (elapsedTime / 1000).toFixed(3);
     },
     startTimer: function () {
         this.startTime = Date.now();
@@ -176,23 +171,23 @@ const Ui = {
         const firstStar = document.querySelector('.full-star');
         firstStar.classList.remove('full-star');
         firstStar.classList.add('empty-star');
-        firstStar.textContent = "star_border";
+        firstStar.textContent = 'star_border';
     },
     showModal: function () {
         document.querySelector('#final-score').innerHTML = document.querySelector('#stars').innerHTML;
         document.querySelector('#winning-message').innerHTML =
-            "You made <b>" + gameState.moves + "</b> moves and finished in <b>" + document.querySelector("#timer span").innerHTML + "</b> seconds!";
-        document.querySelector('#modal').style.display = "block";
+            'You made <b>' + gameState.moves + '</b> moves and finished in <b>' + document.querySelector('#timer span').innerHTML + '</b> seconds!';
+        document.querySelector('#modal').style.display = 'block';
     },
     reset: function () {
-        document.querySelector('#timer span').textContent = "0.000";
+        document.querySelector('#timer span').textContent = '0.000';
         document.querySelector('#moves span').textContent = 0;
         const stars = document.querySelectorAll('#stars i');
         stars.forEach(
             function (star) {
                 star.classList.remove('empty-star');
                 star.classList.add('full-star');
-                star.textContent = "star";
+                star.textContent = 'star';
             }
         )
     }
@@ -201,10 +196,10 @@ const Ui = {
 
 const gameState = {
     CLICKRESULT: {
-        MATCH: "Match",
-        NULLMATCH: "Null Match",
-        NOMATCH: "No Match",
-        WIN: "Win"
+        MATCH: 'Match',
+        NULLMATCH: 'Null Match',
+        NOMATCH: 'No Match',
+        WIN: 'Win'
     },
     moves: 0,
     matchCount: 0,
