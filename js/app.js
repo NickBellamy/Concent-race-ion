@@ -156,10 +156,14 @@ function reset() {
     gameState.reset();
     Ui.reset();
     flipCardsDown();
+    // setTimeout delays dealing until the flip animation has finished flipping cards face down
+    setTimeout(function () {beginGame()}, 350);
+}
+
+function beginGame() {
     shuffledCards = shuffle(settings.CARDS);
     randomisedLocations = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-    // setTimeout delays dealing until the flip animation has finished flipping cards face down
-    setTimeout(function () { deal(shuffledCards, randomisedLocations) }, 500);
+    deal(shuffledCards, randomisedLocations)
 }
 
 /* UI */
@@ -240,4 +244,4 @@ const gameState = {
     }
 }
 
-reset();
+beginGame();
