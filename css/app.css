@@ -16,7 +16,6 @@ h1 {
 @media screen and (min-width: 1920px) {
     h1 {
         font-size: 44px;
-        margin-bottom: 12px;
     }
 
 }
@@ -64,8 +63,8 @@ footer {
     .card_container,
     .front,
     .back {
-        height: 170px;
-        width: 170px;
+        height: 150px;
+        width: 150px;
     }
 }
 
@@ -87,7 +86,7 @@ footer {
 
 @media screen and (min-width: 1920px) {
     .card_container {
-        margin: 11px;
+        margin: 12px;
     }
 }
 
@@ -214,7 +213,7 @@ footer {
 
 @media screen and (min-width: 1920px) {
     #container {
-        width: 800px;
+        width: 700px;
     }
 }
 
