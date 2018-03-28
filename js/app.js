@@ -98,9 +98,7 @@ function shuffle(array) {
         const randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
         // Swap values at currentIndex and randomIndex
-        const temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        [array[currentIndex],array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
     return array;
 }
